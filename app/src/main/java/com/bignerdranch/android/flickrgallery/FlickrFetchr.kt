@@ -18,6 +18,7 @@ private const val TAG = "FlickrFetchr"
 
 class FlickrFetchr {
     private val flickrApi: FlickrApi
+    private val flickrRepository = FlickrRepository()
 
     init {
         val retrofit: Retrofit = Retrofit.Builder()
@@ -31,6 +32,7 @@ class FlickrFetchr {
     fun fetchPhotos(): LiveData<List<GalleryItem>> {
         val responseLiveData: MutableLiveData<List<GalleryItem>> = MutableLiveData()
         val flickrRequest: Call<FlickrResponse> = flickrApi.fetchPhotos()
+        flickrRepository.setFlickrCall(flickrRequest)
 
         flickrRequest.enqueue(object : Callback<FlickrResponse> {
             override fun onResponse(
@@ -41,7 +43,7 @@ class FlickrFetchr {
                 val flickrResponse: FlickrResponse? = response.body()
                 val photoResponse: PhotoResponse? = flickrResponse?.photos
                 var galleryItems: List<GalleryItem> = photoResponse?.galleryItems ?: mutableListOf()
-                galleryItems=galleryItems.filterNot { it.url.isBlank() }
+                galleryItems = galleryItems.filterNot { it.url.isBlank() }
                 responseLiveData.value = galleryItems
             }
 
