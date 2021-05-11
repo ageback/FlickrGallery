@@ -96,6 +96,7 @@ class FlickrGalleryFragment : Fragment() {
                 R.drawable.lxt_up_close
             ) ?: ColorDrawable()
             holder.bindDrawable(placeholder)
+            thumbnailDownloader.queueThumbnail(holder, galleryItem.url)
         }
     }
 
