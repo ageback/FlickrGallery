@@ -11,7 +11,8 @@ interface FlickrApi {
                 "&api_key=d620c755cda2a8b1630636373a90ef16" +
                 "&format=json" +
                 "&nojsoncallback=1" +
-                "&extras=url_s"
+                "&extras=url_s" +
+                "&date=2021-05-10"
     )
     fun fetchPhotos(): Call<FlickrResponse>
 
