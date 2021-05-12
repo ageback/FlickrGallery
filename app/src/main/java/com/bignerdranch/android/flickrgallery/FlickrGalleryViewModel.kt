@@ -10,6 +10,8 @@ class FlickrGalleryViewModel(private val app: Application) : AndroidViewModel(ap
     private val flickrFetchr = FlickrFetchr()
     private val mutableSearchTerm = MutableLiveData<String>()
 
+    val searchTerm: String get() = mutableSearchTerm.value ?: ""
+
     init {
 //        galleryItemLiveData = FlickrFetchr().fetchPhotos()
         mutableSearchTerm.value = QueryPreferences.getStoredQuery(app)

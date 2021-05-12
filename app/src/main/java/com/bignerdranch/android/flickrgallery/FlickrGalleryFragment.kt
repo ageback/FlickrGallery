@@ -91,6 +91,10 @@ class FlickrGalleryFragment : Fragment() {
                 }
 
             })
+
+            setOnSearchClickListener {
+                searchView.setQuery(photoGalleryViewModel.searchTerm, false)
+            }
         }
     }
 
