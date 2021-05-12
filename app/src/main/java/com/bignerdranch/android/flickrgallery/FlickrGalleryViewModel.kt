@@ -1,12 +1,10 @@
 package com.bignerdranch.android.flickrgallery
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
 import com.bignerdranch.android.flickrgallery.api.GalleryItem
 
-class FlickrGalleryViewModel : ViewModel() {
+class FlickrGalleryViewModel(private val app: Application) : AndroidViewModel(app) {
     val galleryItemLiveData: LiveData<List<GalleryItem>>
 
     private val flickrFetchr = FlickrFetchr()
@@ -14,14 +12,19 @@ class FlickrGalleryViewModel : ViewModel() {
 
     init {
 //        galleryItemLiveData = FlickrFetchr().fetchPhotos()
-        mutableSearchTerm.value = "planets"
+        mutableSearchTerm.value = QueryPreferences.getStoredQuery(app)
 
         galleryItemLiveData = Transformations.switchMap(mutableSearchTerm) { searchTerm ->
-            flickrFetchr.searchPhotos(searchTerm)
+            if (searchTerm.isBlank()) {
+                flickrFetchr.fetchPhotos()
+            } else {
+                flickrFetchr.searchPhotos(searchTerm)
+            }
         }
     }
 
     fun fetchPhotos(query: String = "") {
+        QueryPreferences.setStoredQuery(app, query)
         mutableSearchTerm.value = query
     }
 
