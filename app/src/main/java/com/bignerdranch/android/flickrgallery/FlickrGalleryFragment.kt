@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.flickrgallery.api.GalleryItem
-import com.squareup.picasso.Picasso
 
 private const val TAG = "FlickrGalleryFragment "
 
@@ -73,13 +72,6 @@ class FlickrGalleryFragment : Fragment() {
 
     private class PhotoHolder(itemImageView: ImageView) : RecyclerView.ViewHolder(itemImageView) {
         val bindDrawable: (Drawable) -> Unit = itemImageView::setImageDrawable
-
-        val bindGalleryItem: (GalleryItem) -> Unit = { galleryItem ->
-            Picasso.get()
-                .load(galleryItem.url)
-                .placeholder(R.drawable.lxt_up_close)
-                .into(itemImageView)
-        }
     }
 
     private inner class PhotoAdapter(private val galleryItems: List<GalleryItem>) :
@@ -99,13 +91,12 @@ class FlickrGalleryFragment : Fragment() {
 
         override fun onBindViewHolder(holder: PhotoHolder, position: Int) {
             val galleryItem = galleryItems[position]
-            holder.bindGalleryItem(galleryItem)
-//            val placeholder: Drawable = ContextCompat.getDrawable(
-//                requireContext(),
-//                R.drawable.lxt_up_close
-//            ) ?: ColorDrawable()
-//            holder.bindDrawable(placeholder)
-//            thumbnailDownloader.queueThumbnail(holder, galleryItem.url)
+            val placeholder: Drawable = ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.lxt_up_close
+            ) ?: ColorDrawable()
+            holder.bindDrawable(placeholder)
+            thumbnailDownloader.queueThumbnail(holder, galleryItem.url)
         }
     }
 
