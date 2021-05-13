@@ -15,6 +15,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.bignerdranch.android.flickrgallery.api.GalleryItem
 
 private const val TAG = "FlickrGalleryFragment "
@@ -36,6 +40,15 @@ class FlickrGalleryFragment : Fragment() {
             photoHolder.bindDrawable(drawable)
         }
         lifecycle.addObserver(thumbnailDownloader.fragmentLifecycleObserver)
+
+        val constrains = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.UNMETERED)
+            .build()
+        val workRequest = OneTimeWorkRequest
+            .Builder(PollWorker::class.java)
+            .setConstraints(constrains)
+            .build()
+        WorkManager.getInstance(requireContext()).enqueue(workRequest)
     }
 
     override fun onCreateView(

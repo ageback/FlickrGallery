@@ -1,5 +1,7 @@
 package com.bignerdranch.android.flickrgallery
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
@@ -14,6 +16,12 @@ class FlickrGalleryActivity : AppCompatActivity() {
                 .beginTransaction()
                 .add(R.id.fragmentContainer, FlickrGalleryFragment.newInstance())
                 .commit()
+        }
+    }
+
+    companion object {
+        fun newIntent(context: Context): Intent {
+            return Intent(context, FlickrGalleryActivity::class.java)
         }
     }
 }
