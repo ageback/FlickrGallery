@@ -10,19 +10,19 @@ import android.view.*
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.*
+import com.bigne.VisibleFragment
 import com.bignerdranch.android.flickrgallery.api.GalleryItem
 import java.util.concurrent.TimeUnit
 
 private const val TAG = "FlickrGalleryFragment "
 private const val POLL_WORK = "POLL_WORK"
 
-class FlickrGalleryFragment : Fragment() {
+class FlickrGalleryFragment : VisibleFragment() {
     private lateinit var photoGalleryViewModel: FlickrGalleryViewModel
     private lateinit var photoRecyclerView: RecyclerView
     private lateinit var thumbnailDownloader: ThumbnailDownloader<PhotoHolder>
