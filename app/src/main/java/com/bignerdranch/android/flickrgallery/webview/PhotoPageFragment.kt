@@ -33,7 +33,7 @@ class PhotoPageFragment : VisibleFragment() {
         webView.webViewClient = WebViewClient()
         webView.loadUrl(uri.toString())
 
-        return webView
+        return view
     }
 
     companion object {
