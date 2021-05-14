@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bignerdranch.android.flickrgallery.R
 
 class PhotoPageActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo_page)
 
         val fm = supportFragmentManager
