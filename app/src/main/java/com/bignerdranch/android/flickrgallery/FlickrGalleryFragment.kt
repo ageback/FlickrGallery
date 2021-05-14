@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.work.*
 import com.bigne.VisibleFragment
 import com.bignerdranch.android.flickrgallery.api.GalleryItem
+import com.bignerdranch.android.flickrgallery.webview.PhotoPageActivity
 import java.util.concurrent.TimeUnit
 
 private const val TAG = "FlickrGalleryFragment "
@@ -160,7 +161,8 @@ class FlickrGalleryFragment : VisibleFragment() {
         }
 
         override fun onClick(v: View?) {
-            val intent = Intent(Intent.ACTION_VIEW, galleryItem.photoPageUri)
+//            val intent = Intent(Intent.ACTION_VIEW, galleryItem.photoPageUri)
+            val intent = PhotoPageActivity.newIntent(requireContext(), galleryItem.photoPageUri)
             startActivity(intent)
         }
     }

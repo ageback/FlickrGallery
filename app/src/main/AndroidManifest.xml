@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bignerdranch.android.flickrgallery">
-    <permission android:name="com.bignerdranch.android.flickrgallery.PRIVATE"
-        android:protectionLevel="signature"/>
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="com.bignerdranch.android.flickrgallery.PRIVATE"/>
+    <permission
+        android:name="com.bignerdranch.android.flickrgallery.PRIVATE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.bignerdranch.android.flickrgallery.PRIVATE" />
 
     <application
         android:name=".FlickrGalleryApplication"
@@ -22,11 +24,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".NotificationReceiver"
-            android:permission="com.bignerdranch.android.flickrgallery.PRIVATE"
-            android:exported="false">
+        <activity android:name=".webview.PhotoPageActivity" />
+
+        <receiver
+            android:name=".NotificationReceiver"
+            android:exported="false"
+            android:permission="com.bignerdranch.android.flickrgallery.PRIVATE">
             <intent-filter android:priority="-999">
-                <action android:name="com.bignerdranch.android.flickrgallery.SHOW_NOTIFICATION"/>
+                <action android:name="com.bignerdranch.android.flickrgallery.SHOW_NOTIFICATION" />
             </intent-filter>
         </receiver>
     </application>
