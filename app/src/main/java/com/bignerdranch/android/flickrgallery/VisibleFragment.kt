@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 
 private const val TAG = "VisibleFragment "
 
-class VisibleFragment : Fragment() {
+abstract class VisibleFragment : Fragment() {
     private val onShowNotification = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             // 显示Fragment就取消通知
